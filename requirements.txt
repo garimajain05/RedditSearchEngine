@@ -1,1 +1,2 @@
 exa_py
+python-dotenv
