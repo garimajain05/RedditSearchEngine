@@ -99,7 +99,7 @@ Top Search Results:
 RedditSearchEngine
 │
 ├── custom_search_engine.py   #Main searching script
-├── .env                      #Store your EXA_API_KEY here (not committed)
+├── .env                      #Store your EXA_API_KEY here
 ├── requirements.txt          #Python dependencies
 └── readme.md                 #Project documentation
 ```
