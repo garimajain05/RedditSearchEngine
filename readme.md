@@ -1,94 +1,106 @@
-# 🔍 Reddit Search using Exa API
+# 🔍 Custom Search Engine using Exa API
 
-This is a simple Python script to perform keyword-based web search using the [Exa API](https://exa.ai/), currently scoped to Reddit. The script fetches top search results and displays the title and URL for each.
+A flexible, domain-specific search tool powered by the [Exa API](https://exa.ai), allowing users to run intelligent keyword or semantic searches across selected websites. Currently configured for Reddit, this script is easily extensible to other domains like Medium, Instagram, or Twitter.
+
+---
+
+## 🚀 Features
+
+* ✅ Keyword and semantic search support
+* ✅ Domain-level filtering (e.g., search only Reddit, or add others)
+* ✅ CLI with `argparse` for easy usage
+* ✅ Outputs formatted, clickable results
+* ✅ Uses `.env` file to securely manage API key
+* ✅ Error handling and clean output
+
+---
+
+## 🧠 What is Exa?
+
+[Exa](https://exa.ai) is a developer-first search engine API that provides access to web content through keyword and semantic queries. It's designed for building intelligent tools that require reliable and customizable search functionality.
+
+> You must create an account at [https://exa.ai](https://exa.ai) to obtain your API key.
 
 ---
 
 ## 📦 Installation
 
-1. **Create a virtual environment (recommended)**
+1. **Clone the repo and navigate to the folder**
+
+   ```bash
+   git clone https://github.com/garimajain05/RedditSearchEngine.git
+   cd RedditSearchEngine
+   ```
+
+2. **Create and activate a virtual environment**
 
    ```bash
    uv venv
    source .venv/bin/activate
    ```
 
-2. **Install dependencies**
+3. **Install dependencies**
 
    ```bash
    uv pip install -r requirements.txt
    ```
 
-3. **Run the script**
+4. **Create a `.env` file with your Exa API key**
 
-   ```bash
-   python main.py
+   ```
+   EXA_API_KEY=your_exa_api_key_here
    ```
 
 ---
 
-## 🧠 What is Exa?
+## 🧪 Usage
 
-[Exa](https://exa.ai) is a developer-first search API that allows you to build semantic and keyword-based search directly into your applications. It gives you fine-grained control over the domains, number of results, types of search (keyword vs semantic), and more.
+Run the search script from your terminal:
 
-To use this script, you’ll need to:
+```bash
+python custom_search_engine.py "What is the role of AI in mental health?"
+```
 
-* Create an account on [https://exa.ai](https://exa.ai)
-* Retrieve your API key from your dashboard
-* Replace `'YOUR KEY'` in the script with your actual key
+### Optional Arguments
 
----
+| Argument    | Description                                              | Default                      |
+| ----------- | -------------------------------------------------------- | ---------------------------- |
+| `--domains` | List of websites to restrict search to (space-separated) | `['https://www.reddit.com']` |
+| `--results` | Number of results to return                              | `5`                          |
+| `--type`    | Type of search: `keyword` or `semantic`                  | `keyword`                    |
 
-## ⚙️ Modifications You Can Make
+### Example with all options:
 
-You can easily modify the script to tailor the search results to your needs:
-
-* **Add more domains**:
-  You can include more domains like Instagram, Medium, etc.
-
-  ```python
-  include_domains=[
-    'https://www.reddit.com',
-    'https://www.instagram.com',
-    'https://medium.com',
-  ]
-  ```
-
-* **Change number of results**:
-  Increase or decrease the number of results.
-
-  ```python
-  num_results=10  # change from 5 to 10
-  ```
-
-* **Use semantic search instead of keyword search**:
-
-  ```python
-  type='semantic'  # instead of 'keyword'
-  ```
-
-* **Filter by specific time ranges (if supported)** or other metadata by exploring more parameters from the Exa documentation.
+```bash
+python custom_search_engine.py "AI and mental health" \
+  --domains https://www.reddit.com https://www.medium.com \
+  --results 10 \
+  --type semantic
+```
 
 ---
 
-## ✅ Example Output
+## ✅ Sample Output
 
 ```
-$ python3 main.py
-Enter your Search query: What is the role of AI in mental health services?
+🔎 Top Search Results:
 
-Title: The Role of AI in Mental Health Treatment: A Game ...
-URL: https://www.reddit.com/r/socialpsychology/comments/1g9r618/title_the_role_of_ai_in_mental_health_treatment_a/
+1. People Are Turning to AI Therapy—Here's Why It Might Be ...
+   🔗 https://www.reddit.com/r/ArtificialInteligence/comments/1i8cuf0/...
 
-Title: Psychologist's Take: AI's Impact on Mental Healthcare
-URL: https://www.reddit.com/r/aiwars/comments/1glup4a/psychologists_take_ais_impact_on_mental/
+2. Psychologist's Take: AI's Impact on Mental Healthcare
+   🔗 https://www.reddit.com/r/aiwars/comments/1glup4a/...
+```
 
-Title: People Are Turning to AI Therapy—Here's Why It Might Be ...
-URL: https://www.reddit.com/r/ArtificialInteligence/comments/1i8cuf0/more_people_are_turning_to_ai_therapyheres_why_it/
+---
 
-Title: Using AI as a free means to assist in Mental Health
-URL: https://www.reddit.com/r/ArtificialInteligence/comments/12rcn19/using_ai_as_a_free_means_to_assist_in_mental/
+## 🛠 File Structure
 
-Title: People find AI more compassionate and understanding ...
-URL: https://www.reddit.com/r/Futurology/comments/1jclvtj/people_find_ai_more_compassionate_and/
+```
+RedditSearchEngine
+│
+├── custom_search_engine.py   #Main searching script
+├── .env                      #Store your EXA_API_KEY here (not committed)
+├── requirements.txt          #Python dependencies
+└── readme.md                 #Project documentation
 ```
