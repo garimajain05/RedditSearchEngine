@@ -25,7 +25,7 @@ def search_query(query, domains, num_results, search_type):
             print("No results found.")
             return
 
-        print("\n🔎 Top Search Results:\n")
+        print("\nTop Search Results:\n")
         for idx, result in enumerate(response.results, 1):
             print(f"{idx}. \033[1m{result.title}\033[0m")
             print(f"   🔗 {result.url}\n")
@@ -42,11 +42,22 @@ def main():
         help="List of domains to include (default: Reddit)"
     )
     parser.add_argument("--results", type=int, default=5, help="Number of results (default: 5)")
-    parser.add_argument("--type", type=str, choices=["keyword", "semantic"], default="keyword",
-                        help="Search type: keyword or semantic")
+    parser.add_argument(
+                    "--type", type=str,
+                    choices=["keyword", "semantic", "neural", "auto", "magic", "hybrid"],
+                    default="keyword",
+                    help="Search type: one of keyword, semantic, neural, auto, magic, hybrid")
 
     args = parser.parse_args()
-    search_query(args.query, args.domains, args.results, args.type)
+    #mapping CLI-friendly values to Exa-compatible values
+    type_mapping = {
+        "semantic": "neural",
+        "keyword": "keyword"
+    }
+    search_type = type_mapping.get(args.type, "keyword")
+
+    search_query(args.query, args.domains, args.results, search_type)
+
 
 if __name__ == "__main__":
     main()
